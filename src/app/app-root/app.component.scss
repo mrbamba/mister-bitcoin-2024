@@ -1,0 +1,49 @@
+.main-app{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+
+
+    header{
+        height: 120px;
+        display: flex;
+        align-items: center;
+        background-color: #0fa3b1;
+        color: #b5e2fa;
+        font-size: 1.2em;
+        h1{
+            color: white;
+            margin-right: 35px;
+            // display: block;
+        }
+        a {
+            all: unset; /* Resets all styles */
+            cursor: pointer;
+            &:hover{
+                color: white;
+            }
+            margin-right: 15px;
+            &.active{
+                color: white;
+            }
+        }
+    }
+    
+    main{
+        padding-top: 20px;
+        flex-grow: 1;
+        background-color: #f9f7f3;
+        color: #0fa3b1;
+        // color: white;
+
+    }
+    footer{
+        height: 80px;
+        display: flex;
+        align-items: center;
+        color: #f1864d;
+        background-color: #eddea4;
+        font-size: 1.2em;
+    }
+}

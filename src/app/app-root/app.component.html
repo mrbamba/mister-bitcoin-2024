@@ -1,0 +1,22 @@
+<section class="main-app">
+  <header class="container header">
+    <h1>Mister Bitcoin</h1>
+    <nav class="menu">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+      <a routerLink="/contacts" routerLinkActive="active">Contacts</a>
+      <a routerLink="/statistics" routerLinkActive="active">Statistics</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- <home-page [user]="user" [bitcoinMarketPrice]="bitcoinMarketPrice" *ngIf="page=='home'"/>
+    <contact-page [contacts]="contacts" *ngIf="page=='contacts' && contacts"/>
+    <statistics-page *ngIf="page=='statistics'" [tradeVolume]="tradeVolume"/> -->
+    <router-outlet/>
+  </main>
+
+  <footer class="container">
+    <p>Mister Bitcoin &copy;</p>
+  </footer>
+</section>
+<loader/>

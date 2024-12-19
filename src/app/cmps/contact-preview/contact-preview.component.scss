@@ -1,0 +1,19 @@
+.contact-preview{
+    background-color: rgb(223, 223, 223);
+    padding: 0px;
+    // width: 50%;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    color: black;
+    display: flex;
+    img{
+        max-width: 60px;
+        margin: 0px;
+        padding: 0px;
+        margin-left: 25px;
+
+    }
+    h1{
+        padding: 18px;
+    }
+}

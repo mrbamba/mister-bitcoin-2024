@@ -1,0 +1,16 @@
+.login-page{
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        text-align: center;
+    }
+    button{
+        margin-top: 25px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+    h2{
+        margin-top: 25px;
+    }
+}

@@ -1,0 +1,8 @@
+<section>
+    <contact-filter/>
+    <a routerLink="/contacts/add">Add contact</a>
+    <contact-list [contacts]="contacts$ | async"/>
+
+</section>
+<router-outlet/>
+<!-- [contact]="selectedContact" this was in contact details page -->

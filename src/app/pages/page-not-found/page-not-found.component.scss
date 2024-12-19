@@ -1,0 +1,13 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    h1{
+        color: red;
+        text-align: center;
+        font-size: 2em;
+        padding: 15px;
+    }
+    a{
+        text-align: center;
+    }
+}
