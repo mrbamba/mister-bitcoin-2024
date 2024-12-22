@@ -9,6 +9,9 @@ import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit
 import { authGuard } from './guards/auth.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { contactResolver } from './resolvers/contact.resolver';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { SignupModelDrivenComponent } from './cmps/signup-model-driven/signup-model-driven.component';
+import { SignupTemplateDrivenComponent } from './cmps/signup-template-driven/signup-template-driven.component';
 
 const routes: Routes = [
   { 
@@ -42,7 +45,21 @@ const routes: Routes = [
   // {path: '', pathMatch:'full', redirectTo: 'home'},
   { 
     path: 'login', 
-    component:LoginPageComponent 
+    component: LoginPageComponent 
+  },  
+  { 
+    path: 'signup', 
+    component: SignupPageComponent ,
+    children: [
+      {
+        path: 'model-driven',
+        component: SignupModelDrivenComponent
+      },
+      {
+        path: 'template-driven',
+        component: SignupTemplateDrivenComponent
+      }
+    ]
   },
   { 
     path: '**', 

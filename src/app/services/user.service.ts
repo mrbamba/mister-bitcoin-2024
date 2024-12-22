@@ -9,9 +9,19 @@ export class UserService {
 
   user : User = {
     fullName : 'Steven Farks',
+    email: 'stevenfarksallot@gmail.com',
+    address:{
+      street: '34 Golumb st',
+      city: 'Tel aviv',
+      state: 'Center',
+      country: 'Israel',
+      zip: '60000',
+  },
     bitcoinBalance: 100,
     _id: 'u1001',
-    moves: []
+    moves: [],
+    dateOfBirth: 1734687146,
+    newsletterSubscription: true,
   } 
 
   // user: User | null = null
@@ -25,3 +35,4 @@ export class UserService {
     return this._loggedInUser$.value
   }
 }
+

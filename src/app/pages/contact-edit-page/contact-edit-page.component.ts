@@ -29,7 +29,7 @@ export class ContactEditPageComponent implements OnInit{
       this.contact = contact
     })
     // ---------------------------------
-    // What to do if not using resolver:
+    // When not using resolver:
     // this.route.params.pipe(
     //   map(params => params['contactId']),
     //   filter(contactId => !!contactId),

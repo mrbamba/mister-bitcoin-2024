@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+    margin-bottom: 25px;
+}
+nav{
+    display: flex;
+    justify-content: space-evenly;    
+    a {
+        all: unset; /* Resets all styles */
+        cursor: pointer;
+        &:hover{
+            color: #f1864d;
+        }
+        margin-right: 15px;
+        &.active{
+            color: #f1864d;
+            text-decoration: underline;
+        }
+    }
+    margin-bottom: 25px;
+}

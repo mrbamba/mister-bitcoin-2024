@@ -9,7 +9,6 @@ import { ContactDetailsPageComponent } from './pages/contact-details-page/contac
 import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
 import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.component';
 import { ContactListComponent } from './cmps/contact-list/contact-list.component';
-import { ChartComponent } from './cmps/chart/chart.component';
 import { ContactFilterComponent } from './cmps/contact-filter/contact-filter.component';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -24,6 +23,8 @@ import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoaderComponent } from './cmps/loader/loader.component';
+import { SignupTemplateDrivenComponent } from './cmps/signup-template-driven/signup-template-driven.component';
+import { SignupModelDrivenComponent } from './cmps/signup-model-driven/signup-model-driven.component';
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 // --------------End chart imports
 
@@ -36,12 +37,13 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     StatisticsPageComponent,
     ContactPreviewComponent,
     ContactListComponent,
-    ChartComponent,
     ContactFilterComponent,
     ContactEditPageComponent,
     LoginPageComponent,
     SignupPageComponent,
-    LoaderComponent
+    LoaderComponent,
+    SignupTemplateDrivenComponent,
+    SignupModelDrivenComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, inject, input, Input } from '@angular/core';
 import { User } from '../../models/user.models';
+import { BitcoinService } from '../../services/bitcoin.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'home-page',
@@ -9,8 +11,15 @@ import { User } from '../../models/user.models';
   styleUrl: './home-page.component.scss'
 })
 export class HomePageComponent {
-  @Input() user?: User
-  @Input() bitcoinMarketPrice?: number
+  private bitcoinService = inject(BitcoinService)
+  private userService = inject(UserService)
+  user?: User | null = this.userService.getUser()
 
+  bitcoinMarketPrice?: number
+ngOnInit(){
+  this.bitcoinService.getMarketPrice().subscribe({
+    next: (price: number) => this.bitcoinMarketPrice = price
+  })
   
+}
 }
