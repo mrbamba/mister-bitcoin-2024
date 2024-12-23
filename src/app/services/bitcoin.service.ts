@@ -23,8 +23,6 @@ export class BitcoinService {
   }
 
   public getTradeVolume():Observable<object>{
-    console.log('getting called');
-    
     return this.http.get<any>(this.tradeVolumeAPIUrl).pipe(
       map((data) => data.values.map((item:any) => ({x:item.x, y:item.y})))
     )

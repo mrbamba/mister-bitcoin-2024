@@ -21,6 +21,7 @@ const routes: Routes = [
   {
     path: 'contacts', 
     component: ContactPageComponent, 
+    canActivate: [authGuard], 
     children: [
       { path: 'add', component: ContactEditPageComponent }
     ]

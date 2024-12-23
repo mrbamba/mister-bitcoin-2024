@@ -18,7 +18,7 @@ import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactEditPageComponent } from './pages/contact-edit-page/contact-edit-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
@@ -49,7 +49,8 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     BrowserModule,
     AppRoutingModule,
     NgxEchartsModule.forRoot({ echarts }),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

@@ -1,1 +1,48 @@
-<p>signup-template-driven works!</p>
+<pre>{{form.value | json}}</pre>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <h2>Template registration form</h2>
+
+    <div><input ngModel type="text" #fullName="ngModel" required minlength="3" name="fullName" placeholder="Full name">
+        <p *ngIf="fullName.touched && fullName.invalid" class="errors">
+            <span *ngIf="fullName.errors?.['required']"> Full name is required!</span>
+            <span *ngIf="fullName.errors?.['minlength']"> Minimum length is 3 characters!</span>
+        </p>
+    </div>
+
+    <input ngModel type="text" name="email" placeholder="email">
+
+    <p>Address:</p>
+    <div ngModelGroup="address">
+
+        <input ngModel type="text" name="street" placeholder="Street">
+
+        <input ngModel type="text" name="city" placeholder="City">
+
+        <select ngModel type="text" name="state" placeholder="State">
+            <option value="" disabled>Select a state</option>
+            <option value="AZ">AZ</option>
+            <option value="CA">CA</option>
+            <option value="NY">NY</option>
+        </select>
+
+        <input ngModel type="text" name="country" placeholder="Country">
+
+        <input ngModel type="text" name="zip" placeholder="Zipcode">
+
+    </div>
+
+    <input ngModel name="dateOfBirth" type="date" placeholder="Date of birth">
+
+    <p>Would you like to receive our newsletter?</p>
+    <label for="yes">
+        <input ngModel type="radio" id="yes" name="newsLetterSubscription" value="Yes">
+        Yes
+    </label>
+    <label for="no">
+        <input ngModel type="radio" id="no" name="newsletterSubscription" value="No">
+        No
+    </label>
+
+    <button [disabled]="form.invalid" type="submit">Register</button>
+
+</form>

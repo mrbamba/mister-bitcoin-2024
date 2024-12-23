@@ -1,0 +1,19 @@
+h2{
+    margin-bottom: 25px;
+    text-align: center;
+}
+input, select, button{
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    &.ng-touched.ng-invalid{
+        border-left: 5px solid red
+    }  
+    &.ng-valid[required]{
+        border-left: 5px solid rgb(0, 198, 0);
+    }
+}
+p{
+    margin-bottom: 10px;
+    margin-top: 1px;
+}

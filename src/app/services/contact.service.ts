@@ -36,7 +36,7 @@ export class ContactService {
                     }
                     contacts = contacts.filter(contact => contact.name.toLowerCase().includes(filterBy.term.toLowerCase()))
                     this._contacts$.next(this._sort(contacts))
-                    console.log(this.contacts$);
+                    // console.log(this.contacts$);
                     
                 }),
                 retry(1),

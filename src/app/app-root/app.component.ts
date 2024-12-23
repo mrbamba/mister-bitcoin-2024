@@ -15,6 +15,9 @@ import { ContactService } from '../services/contact.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
+  constructor() {
+  }
+  
   title = 'ex-mister-bitcoin';
   private bitcoinService = inject(BitcoinService)
   private userService = inject(UserService)

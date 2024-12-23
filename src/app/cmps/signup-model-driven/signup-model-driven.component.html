@@ -1,1 +1,52 @@
-<p>signup-model-driven works!</p>
+<pre>
+    {{form.value | json}}
+</pre>
+<form [formGroup]="form">
+    <h2>Model registration form</h2>
+    <input type="text" formControlName="fullName" placeholder="Full name">
+    <ng-container *ngIf="form.controls['fullName'] as fullName">
+        <p *ngIf="fullName.touched && fullName.invalid" class="errors">
+            <span *ngIf="fullName.errors?.['required']"> - Full name is required </span>
+            <span *ngIf="fullName.errors?.['minlength']"> - Full name has to be atleast 3 characters long </span>
+            <span *ngIf="fullName.errors?.['onlyLowerCaseLetters'] as errorMsg">
+                {{errorMsg}}
+            </span>
+        </p>
+    </ng-container>
+    <input type="email" formControlName="email" placeholder="Email address">
+    <div formArrayName="addresses">
+        <div 
+        *ngFor="let address of $any(form.controls['addresses']).controls
+        let idx = index"
+        [formGroupName]="idx">
+            <p>Address {{idx+1}}:</p>
+            <input type="text" formControlName="street" placeholder="Street">
+            <input type="text" formControlName="city" placeholder="City">
+            <select formControlName="state">
+                <option value="" disabled>Select a state</option>
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="NY">NY</option>
+            </select>
+            <input type="text" formControlName="country" placeholder="Country">
+            <input type="text" formControlName="zip" placeholder="Zipcode">
+        </div>
+        <button (click)="onAddAddress()">Add another address</button>
+
+    </div>
+
+    <input formControlName="dateOfBirth" type="date" placeholder="Date of birth">
+
+    <p>Would you like to receive our newsletter?</p>
+    <label for="yes">
+        <input type="radio" id="yes" formControlName="newsletterSubscription" value="Yes">
+        Yes
+    </label>
+    <label for="no">
+        <input type="radio" id="no" formControlName="newsletterSubscription" value="No">
+        No
+    </label>
+
+    <button [disabled]="form.invalid" type="submit">Register</button>
+
+</form>

@@ -1,8 +1,23 @@
-.home-page{
-    h1,h2,h3{
-    padding-bottom: 1em;
+.home-page {
+
+    h1,
+    h2,
+    h3 {
+        padding-bottom: 1em;
+    }
+
+    img {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-evenly;
+        a {
+            margin-right: 15px;
+            font-size: 1.5em;
+        }
+
+    }
 }
-img{
-    width: 20px;
-    margin-right: 10px;
-}}

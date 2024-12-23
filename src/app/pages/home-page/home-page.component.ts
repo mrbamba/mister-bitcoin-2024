@@ -14,12 +14,16 @@ export class HomePageComponent {
   private bitcoinService = inject(BitcoinService)
   private userService = inject(UserService)
   user?: User | null = this.userService.getUser()
-
-  bitcoinMarketPrice?: number
-ngOnInit(){
-  this.bitcoinService.getMarketPrice().subscribe({
-    next: (price: number) => this.bitcoinMarketPrice = price
-  })
   
-}
+  bitcoinMarketPrice?: number
+  ngOnInit(){
+    this.bitcoinService.getMarketPrice().subscribe({
+      next: (price: number) => this.bitcoinMarketPrice = price
+    })
+    
+  }
+  onLogout() {
+  
+    this.userService.logout()
+  }
 }
