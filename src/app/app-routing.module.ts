@@ -16,7 +16,8 @@ import { SignupTemplateDrivenComponent } from './cmps/signup-template-driven/sig
 const routes: Routes = [
   { 
     path: '', 
-    component: HomePageComponent 
+    component: HomePageComponent,
+    canActivate: [authGuard], 
   },
   {
     path: 'contacts', 

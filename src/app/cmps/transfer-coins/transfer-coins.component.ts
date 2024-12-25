@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Inject, Input, Output } from '@angular/core';
 import { Contact } from '../../models/contact.model';
 import { MsgService } from '../../services/msg.service';
-import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'transfer-coins',
@@ -11,7 +10,7 @@ import { UserService } from '../../services/user.service';
     styleUrl: './transfer-coins.component.scss'
 })
 export class TransferCoinsComponent {
-    private msgService = Inject(MsgService)
+    private msgService = inject(MsgService)
 
     amount?: number
 
@@ -20,7 +19,7 @@ export class TransferCoinsComponent {
     @Output() transferCoins = new EventEmitter
 
     onTransferCoins(): void {
-        if (!this.amount || this.maxCoins < this.amount) {
+        if (!this.amount || this.maxCoins < this.amount) {            
             this.msgService.setErrorMsg('Not enough coins')
         } else {
             this.transferCoins.emit(this.amount)

@@ -5,6 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs';
 import { Location } from '@angular/common';
+import { MsgService } from '../../services/msg.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ContactEditPageComponent implements OnInit{
   private route = inject(ActivatedRoute)
   private router = inject(Router)
   private locationService = inject(Location)
+  private msgService = inject(MsgService)
 
   
   contact = this.contactService.getEmptyContact()
@@ -50,7 +52,10 @@ export class ContactEditPageComponent implements OnInit{
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         error: err => console.log('err: ', err),
-        complete: () => this.onBack()
+        complete: () => {
+            this.msgService.setSuccessMsg('Contact ' + ((this.contact._id)? ' edited ':' created ') + 'successfully')
+            this.onBack()
+        }
       })
   }
   onBack() {
