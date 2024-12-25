@@ -1,4 +1,6 @@
-# ExMisterBitcoin
+# MisterBitcoin
+
+Check out the project on GitHub pages here:[MisterBitcoin](https://mrbamba.github.io/mister-bitcoin-2024/#/)
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
 
