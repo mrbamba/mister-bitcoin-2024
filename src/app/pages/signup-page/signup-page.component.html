@@ -1,4 +1,15 @@
 <h1>Signup page</h1>
+<form (ngSubmit)="signup()">
+    <input 
+        name="userName" 
+        type="text"
+        placeholder="Username"
+        [(ngModel)]=userName
+    >
+    <button type="submit">Signup</button>
+
+</form>
+<h1>Example advanced signup forms:</h1>
 <nav>
     <a routerLink="template-driven" routerLinkActive="active">Template Driven - FormsModule</a>
     <a routerLink="model-driven" routerLinkActive="active">Model driven - ReactiveFormsModule</a>

@@ -4,6 +4,8 @@ import { Contact } from '../../models/contact.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, switchMap } from 'rxjs';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'contact-edit-page',
@@ -17,6 +19,8 @@ export class ContactEditPageComponent implements OnInit{
   private destroyRef = inject(DestroyRef)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
+  private locationService = inject(Location)
+
   
   contact = this.contactService.getEmptyContact()
   
@@ -46,7 +50,10 @@ export class ContactEditPageComponent implements OnInit{
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         error: err => console.log('err: ', err),
-        complete: () => this.router.navigateByUrl('/contacts')
+        complete: () => this.onBack()
       })
   }
+  onBack() {
+    this.locationService.back()
+}
 }

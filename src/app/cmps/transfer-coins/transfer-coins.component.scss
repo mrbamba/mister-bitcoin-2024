@@ -1,0 +1,35 @@
+.transfer-coins {
+    h1{
+        text-align: center;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    form {
+        display: flex;
+        justify-content: space-around;
+
+        input,
+        button {
+            background-color: #04AA6D; /* Green */
+            border: none;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        input{
+            background-color: #fff;
+            color: black;
+        }
+        button:hover{
+            background-color: #feacac;
+            color: black;
+        }
+    }
+    margin-bottom: 50px;
+}

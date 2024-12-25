@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from '../models/user.models';
+import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { BitcoinService } from '../services/bitcoin.service';
 import { Contact } from '../models/contact.model';
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   private contactService = inject(ContactService)
   private subscription!: Subscription
 
-  user?: User | null = this.userService.getUser()
+  user?: User | null = this.userService.getLoggedInUser()
 
   bitcoinMarketPrice?: number
   page: string = 'home'

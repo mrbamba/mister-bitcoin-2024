@@ -11,7 +11,7 @@ export const contactResolver: ResolveFn<Contact> = (route, state) => {
   const loaderService = inject(LoaderService)
   loaderService.setIsLoading(true)
   return contactService.getContactById(contactId).pipe(
-    delay(500),
+    // delay(500),
     finalize(() => loaderService.setIsLoading(false))
   )
 

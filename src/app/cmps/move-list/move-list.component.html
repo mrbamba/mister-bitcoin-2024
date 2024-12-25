@@ -1,0 +1,13 @@
+<section *ngIf="moves.length" class="moves">
+    <h2> {{title}} </h2>
+    <ul *ngFor="let move of moves" class="capitalize flex transfers-container">
+        <li>
+            <span>
+                <b>{{move.amount}}</b> Coins 
+            </span>
+            <span *ngIf="!_contact" class="name-container"> to {{move.toContactName}} were </span>
+            <span> transfered on: {{ move.timestamp | date : 'dd.MM.yy HH:mm' }}</span>
+
+        </li>
+    </ul>
+</section>

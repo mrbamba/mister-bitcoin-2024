@@ -1,12 +1,16 @@
 <section class="contact-details" *ngIf="contact$ | async as contact">
     <!-- <p>{{contact | json}}</p> -->
-    <img src="https://robohash.org/{{contact._id}}?set=set2" alt="">
-    <h1>Name: {{contact.name}}</h1>
-    <h1>Phone: {{contact.phone}}</h1>
-    <h1>Email: {{contact.email}}</h1>
     <div class="buttons">
         <button (click)="onBack()">Back</button>
         <button [routerLink]="['/contact',contact._id,'edit', contact._id]">Edit contact</button>
     </div>
+    <section class="inner-contact-details">
+        <img src="https://robohash.org/{{contact._id}}?set=set2" alt="">
+        <h1>Name: {{contact.name}}</h1>
+        <h1>Phone: {{contact.phone}}</h1>
+        <h1>Email: {{contact.email}}</h1>
+    </section>
+    <transfer-coins *ngIf="user$ | async as user" [contact]="contact" (transferCoins)="onTransferCoins($event)" [maxCoins]="user.bitcoinBalance" />
 </section>
-<router-outlet/>
+<move-list *ngIf="contactMoves$ | async as moves" [moves]="moves" [contact]="contact"/>
+<router-outlet />

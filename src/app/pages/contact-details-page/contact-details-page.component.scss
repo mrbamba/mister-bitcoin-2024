@@ -1,6 +1,11 @@
-.contact-details {
-    display: flex;
-    flex-direction: column;
+.contact-details {        
+
+    section{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 50px;
+
+    }
 
     img {
         max-width: 150px;

@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, Input, input, OnDestroy, OnInit } from '@angular/core';
 import type { EChartsCoreOption } from 'echarts/core';
-import { BitcoinService } from '../../services/bitcoin.service';
+import { BitcoinService} from '../../services/bitcoin.service';
 import { Subscription } from 'rxjs';
+import { use } from 'echarts/core';
+import { LegendComponent, TooltipComponent } from 'echarts/components';
 
 @Component({
   selector: 'statistics-page',
@@ -20,6 +22,7 @@ export class StatisticsPageComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
+    use([LegendComponent, TooltipComponent]);
     this.sub$ = this.bitcoinService.getTradeVolume().subscribe({
       next: (vol: object) => this.tradeVolume = vol,
       complete: ()=>  this.calculateChart()
@@ -33,7 +36,7 @@ export class StatisticsPageComponent implements OnInit, OnDestroy{
     const timeData = this.tradeVolume.map((item: any) => new Date(item.x * 1000).getMonth());
     // const timeData = [1, 2, 3, 4, 5, 6];
     const data2 = this.tradeVolume.map((item: any) => item.y);
-    console.log('x:', timeData, 'y: ', data2);
+    // console.log('x:', timeData, 'y: ', data2);
 
     // const timeData = []
     // const data2 = []

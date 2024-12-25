@@ -1,94 +1,125 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, from, map, of } from 'rxjs';
-import { User } from '../models/user.models';
+import { BehaviorSubject, catchError, from, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import { User } from '../models/user.model';
 import { storageService } from './async-storage.service';
+import { utilService } from './storage.service';
+import { Contact } from '../models/contact.model';
+import { Move } from '../models/move.model';
 const ENTITY = 'user'
+const ENTITY_LOGGEDIN_USER = 'loggedinUser'
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class UserService {
-  user?: User
-  private _loggedInUser$ = new BehaviorSubject<User | undefined>(undefined);
-  public loggedInUser$ = this._loggedInUser$.asObservable()
-  constructor() {
-    this.loadUser()
-  }
-
-  private loadUser(): void {
-    from(Promise.resolve(localStorage.getItem(ENTITY)))
-      .pipe(
-        map((storedUser) => (storedUser ? JSON.parse(storedUser) as User : this._createUser())),
-        catchError((error) => {
-          console.error('Error parsing user data: ', error)
-          const newUser = this._createUser()
-          localStorage.setItem(ENTITY, JSON.stringify(newUser))
-          return of(newUser)
-        })
-      )
-      .subscribe((user)=>{
-        this._loggedInUser$.next(user)
-      })
-  }
-
-  public getUser(): User | undefined {
-    return this._loggedInUser$.value
-  }
-
-  _createUser(): User {
-    return {
-      fullName: 'Steven Farks',
-      email: 'stevenfarksallot@gmail.com',
-      address: {
-        street: '34 Golumb st',
-        city: 'Tel aviv',
-        state: 'Center',
-        country: 'Israel',
-        zip: '60000',
-      },
-      bitcoinBalance: 100,
-      _id: 'u1001',
-      moves: [],
-      dateOfBirth: 1734687146,
-      newsletterSubscription: true,
+    
+    constructor() {
+        const users = JSON.parse(localStorage.getItem(ENTITY)!)
+        if (!users || users.length === 0) {
+            localStorage.setItem(ENTITY, JSON.stringify([]))
+        }
     }
-  }
 
-  logout() {
-    this._loggedInUser$.next(undefined);
-    localStorage.removeItem(ENTITY)
-    this._loggedInUser$.next(this.user)
-  }
-  
-  getEmptyUser(): User {
-    return {
-      fullName: '',
-      email: '',
-      address: {
-        street: '',
-        city: '',
-        state: '',
-        country: '',
-        zip: '',
-      },
-      bitcoinBalance: 100,
-      _id: '',
-      moves: [],
-      dateOfBirth: Date. now(),
-      newsletterSubscription: true,
+    private _loggedInUser$ = new BehaviorSubject<User | null>(utilService.loadFromSession(ENTITY_LOGGEDIN_USER))
+    public loggedInUser$ = this._loggedInUser$.asObservable()
+
+    public signup(name: string) {
+        return from(storageService.query<User>(ENTITY)).pipe(
+            map(users => users.find(_user => _user.fullName === name)),
+            switchMap(user => user
+                ? of(user)
+                : from(storageService.post(ENTITY, this._createUser(name) as User))
+            ),
+            tap(user => this._saveLocalUser(user))
+        )
     }
-  }
+    
+    public logout() {
+        return of(null).pipe(
+            tap(() => this._saveLocalUser(null))
+        )
+    }
+    
+    public addMove(contact: Contact, amount: number): Observable<null | any> {
+        if (!amount) return of(null)
+
+        const loggedinUser = { ...this.getLoggedInUser() }
+        if ((loggedinUser.bitcoinBalance || 0) < amount) {
+            return throwError(() => new Error('Not enough coins'))
+        }
+
+        const newMove = this._createMove(contact, amount)
+        loggedinUser.bitcoinBalance = (loggedinUser.bitcoinBalance || 0) - amount
+        loggedinUser.moves = loggedinUser.moves || [];
+        loggedinUser.moves.unshift(newMove)
+
+        if (!loggedinUser._id) {
+            return throwError(() => new Error('Logged-in user ID is missing'));
+        }
+        if (!loggedinUser._id || !loggedinUser.fullName || loggedinUser.bitcoinBalance === undefined) {
+            return throwError(() => new Error('Invalid user data'));
+        }
+        return from(storageService.put(ENTITY, loggedinUser as User)).pipe(
+            tap(() => this._saveLocalUser(loggedinUser as User))
+        );
+    }
+
+    public getLoggedInUser(): User | null {
+        return this._loggedInUser$.value
+    }
+    
+    private _createUser(name: string): Partial<User> {
+        return {
+            fullName: name,
+            bitcoinBalance: 100,
+            moves: [],
+            _id: _getRandomId(),
+        }
+    }
+
+    private _createMove(contact: Contact, amount: number): Move {
+        return {
+            toContactId: contact._id,
+            toContactName: contact.name,
+            timestamp: Date.now(),
+            amount
+        }
+    }
+
+    private _saveLocalUser(user: User | null) {
+        this._loggedInUser$.next(user ? { ...user } : null);
+        utilService.saveToSession(ENTITY_LOGGEDIN_USER, user)
+    }
+
+    // getEmptyUser(): Partial<User> {
+    //   return {
+    //     fullName: '',
+    //     // email: '',
+    //     // address: {
+    //     //   street: '',
+    //     //   city: '',
+    //     //   state: '',
+    //     //   country: '',
+    //     //   zip: '',
+    //     // },
+    //     bitcoinBalance: 100,
+    //     // _id: '',
+    //     moves: [],
+    //     // dateOfBirth: Date. now(),
+    //     // newsletterSubscription: true,
+    //   }
+    // }
 
 }
 
 function _getRandomId(length = 8): string {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() *
-          characters.length));
-  }
-  return result;
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            characters.length));
+    }
+    return result;
 }
 

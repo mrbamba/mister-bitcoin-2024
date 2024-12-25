@@ -1,0 +1,7 @@
+<div class="transfer-coins">
+    <h1>Transfer coins to {{contact.name}}:</h1>
+    <form (ngSubmit)="onTransferCoins()">
+        <input name="amount" placeholder="Amount" [(ngModel)]="amount" type="text">
+        <button>Transfer</button>    
+    </form>
+</div>

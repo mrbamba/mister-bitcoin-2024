@@ -1,3 +1,21 @@
+form{
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    input, select, button{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        &.ng-touched.ng-invalid{
+            border-left: 5px solid red
+        }  
+        &.ng-valid[required]{
+            border-left: 5px solid rgb(0, 198, 0);
+        }
+    }
+}
+
 h1{
     text-align: center;
     margin-bottom: 25px;

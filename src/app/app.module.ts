@@ -25,6 +25,10 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { LoaderComponent } from './cmps/loader/loader.component';
 import { SignupTemplateDrivenComponent } from './cmps/signup-template-driven/signup-template-driven.component';
 import { SignupModelDrivenComponent } from './cmps/signup-model-driven/signup-model-driven.component';
+import { MessageModalComponent } from './cmps/message-modal/message-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MoveListComponent } from './cmps/move-list/move-list.component';
+import { TransferCoinsComponent } from './cmps/transfer-coins/transfer-coins.component';
 echarts.use([BarChart, GridComponent, CanvasRenderer]);
 // --------------End chart imports
 
@@ -43,14 +47,18 @@ echarts.use([BarChart, GridComponent, CanvasRenderer]);
     SignupPageComponent,
     LoaderComponent,
     SignupTemplateDrivenComponent,
-    SignupModelDrivenComponent
+    SignupModelDrivenComponent,
+    MessageModalComponent,
+    MoveListComponent,
+    TransferCoinsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxEchartsModule.forRoot({ echarts }),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

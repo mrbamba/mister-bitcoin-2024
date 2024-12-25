@@ -6,8 +6,21 @@
     
     
     header{
-        img{
-            margin-right: 10px;
+        display: flex;
+        justify-content: space-between;
+        div{
+            display: flex;
+        align-items: center;
+
+            img{
+                margin-right: 10px;
+            }
+            h1{
+                color: white;
+                margin-right: 15px;
+                // display: block;
+            }
+            
         }
         height: 120px;
         display: flex;
@@ -15,11 +28,6 @@
         background-color: #0fa3b1;
         color: #b5e2fa;
         font-size: 1.2em;
-        h1{
-            color: white;
-            margin-right: 15px;
-            // display: block;
-        }
         a {
             all: unset; /* Resets all styles */
             cursor: pointer;
